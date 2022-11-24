@@ -5,10 +5,10 @@ class SignIn extends React.Component {
         inputText: "",
         password: null,
     }
-    handleInput = (e) => {
+    handleInput = ({target : { value }}) => {
         this.setState({
-            inputText: e.target.value,
-            password: e.target.value
+            inputText: value,
+            password: value
         })
     }
     render() {
