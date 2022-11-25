@@ -2,12 +2,17 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import NoMatch from "./components/NoMatch";
+import Navbar from "./components/Navbar";
 
-const App = () => {
+
+function App() {
   return (
-    <div className="container">
+    <div className="container mx-auto">
+      <Navbar />
+
       <Switch>
-        <Route path="/home">
+        <Route path="/" exact>
           <Home />
         </Route>
         <Route path="/sign-in">
@@ -15,6 +20,9 @@ const App = () => {
         </Route>
         <Route path="/sign-up">
           <SignUp />
+        </Route>
+        <Route path="*">
+          <NoMatch />
         </Route>
       </Switch>
     </div>
