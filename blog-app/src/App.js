@@ -10,7 +10,6 @@ function App() {
   return (
     <div className="container mx-auto">
       <Navbar />
-
       <Switch>
         <Route path="/" exact>
           <Home />
