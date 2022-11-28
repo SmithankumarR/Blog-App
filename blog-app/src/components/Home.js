@@ -1,5 +1,7 @@
 import React from "react";
 import Articles from "./Articles";
+import Sidebar from "./Sidebar";
+
 class Home extends React.Component {
 
     render() {
@@ -17,6 +19,7 @@ class Home extends React.Component {
                     <h2 className="text-green-600 my-8">Global Feed</h2>
                     <hr className="w-full" />
                     <Articles />
+                    <Sidebar />
                 </main>
             </>
         )

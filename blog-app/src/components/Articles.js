@@ -1,8 +1,7 @@
+import React, { Component } from 'react';
+import { articlesUrl } from "../utils/constant";
+import  BeatLoader  from   "react-spinners/BeatLoader"
 import Article from "./Article";
-import BeatLoader from "react-spinners/BeatLoader"
-import Tags from "./Tags";
-import { articlesUrl } from "../utils/constant"
-import React, { Component } from 'react'
 
 class Articles extends Component {
 
@@ -13,7 +12,7 @@ class Articles extends Component {
 
     componentDidMount() {
         fetch(articlesUrl + "/?limit=10")
-        // used to check the status code 
+            // used to check the status code 
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -43,8 +42,8 @@ class Articles extends Component {
                     {
                         articles.map((article) => (
                             <div>
+                                {/* {console.log(article)} */}
                                 <Article key={article.slug} article={article} />
-                                {/* <Tags /> */}
                             </div>
                         ))
                     }
@@ -54,4 +53,4 @@ class Articles extends Component {
     }
 }
 
-export default Articles
+export default Articles;
