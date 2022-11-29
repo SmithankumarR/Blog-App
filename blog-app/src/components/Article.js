@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom"
 
 function Article(props) {
     return (
@@ -17,11 +18,15 @@ function Article(props) {
                 </button>
             </div>
             <h2 className="text-2xl font-medium text-black">{props.article.title}</h2>
-            <p className="mb-7 mt-2">{props.article.description}</p>
+            <Link to={`/article/${props.article.slug}`}>
+                <p className="mb-7 mt-2">{props.article.description}</p>
+            </Link>
             <div className="flex justify-between">
-                <button>Read more...</button>
+                <Link to={`/article/${props.article.slug}`}>
+                    <button>Read more...</button>
+                </Link>
                 <span className="flex">
-                    {props.article.tagList.map((tag) => <p key={tag} className="mx-2 border py-1 px-3 rounded-full">{tag}</p>)}
+                    <p key={props.tag} className="mx-2 border py-1 px-3 rounded-full">{props.tag}</p>
                 </span>
             </div>
             <hr className="w-full mt-2" />

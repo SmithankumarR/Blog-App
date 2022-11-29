@@ -13,22 +13,30 @@ class Home extends React.Component {
         error: "",
         articlesCount: 0,
         articlesPerPage: 10,
-        activePageIndex: 1
+        activePageIndex: 1,
+        activeTab: ""
     };
-
+    removeTab = () => {
+        this.setState({activeTab:""})
+    }
+    addTab = (value) => {
+        this.setState({ activeTab: value })
+    }
     componentDidMount() {
         this.fetchData()
     }
     componentDidUpdate(_prevProps, prevState) {
-        if (prevState.activePageIndex !== this.state.activePageIndex) {
+        if (prevState.activePageIndex !== this.state.activePageIndex ||
+            prevState.activeTab !== this.state.activeTab) {
             this.fetchData();
         }
     }
     fetchData = () => {
         const limit = this.state.articlesPerPage;
         const offset = (this.state.activePageIndex - 1) * limit;
+        const tag =  this.state.activeTab;
 
-        fetch(articlesUrl + `/?offset=${offset}&limit=${limit}`)
+        fetch(articlesUrl + `/?offset=${offset}&limit=${limit}` + (tag && `tag=${tag}`))
             // used to check the status code 
             .then((res) => {
                 if (!res.ok) {
@@ -52,13 +60,13 @@ class Home extends React.Component {
         this.setState({ activePageIndex: index }, this.fetchData)
     }
     render() {
-        const { articles, error, articlesCount, articlesPerPage, activePageIndex } = this.state;
+        const { articles, error, articlesCount, articlesPerPage, activePageIndex, activeTab } = this.state;
 
         return (
             <>
                 <main className="container mx-auto">
                     <Hero />
-                    <FeedNav />
+                    <FeedNav activeTab={activeTab} removeTab={this.removeTab} />
                     <div className="flex">
                         <div className="w-2/3 mx-2">
                             <hr className="w-full" />
@@ -71,7 +79,7 @@ class Home extends React.Component {
                             />
                         </div>
                         <div className="w-1/3 mx-2">
-                            <Sidebar />
+                            <Sidebar addTab={this.addTab}/>
                         </div>
                     </div>
                 </main>

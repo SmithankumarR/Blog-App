@@ -42,7 +42,12 @@ export class Sidebar extends Component {
                 <h3 className='font-medium text-lg my-4'> Popular Tags </h3>
                 <h4 className='flex flex-wrap'>
                     {
-                        tags.map(tag => <span key={tag} className='bg-slate-600 p-2 mx-2 my-2 rounded-md text-slate-50'>{tag}</span>)
+                        tags.map(tag =>
+                            <span key={tag} 
+                            onClick={() => this.props.addTab(tag)}
+                            className='bg-slate-600 p-2 mx-2 my-2 rounded-md text-slate-50'>
+                                {tag}
+                            </span>)
                     }
                 </h4>
             </aside>

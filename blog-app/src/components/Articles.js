@@ -9,6 +9,9 @@ function Articles(props) {
     if (!props.articles) {
         return <BeatLoader />
     }
+    if (props.articles.length < 1) {
+        return <h2 className="text-3xl">No, Articles Found !</h2>
+    }
     return (
         <section className="flex">
             <article>

@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import NoMatch from "./components/NoMatch";
 import Navbar from "./components/Navbar";
+import SingleArticle from "./components/SingleArticle";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/sign-up">
           <SignUp />
         </Route>
+        <Route path="/article/:slug" component={SingleArticle}/>
         <Route path="*">
           <NoMatch />
         </Route>
