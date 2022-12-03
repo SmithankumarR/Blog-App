@@ -2,9 +2,9 @@ import React from 'react'
 
 function Hero() {
     return (
-        <section className="bg-green-600 text-slate-100 text-center py-12">
+        <section className="bg-gray-900 text-slate-100 text-center py-12">
             <h1 className="text-4xl">
-                Conduit
+                TechFeed
             </h1>
             <h3>A place to share your knowledge</h3>
         </section>

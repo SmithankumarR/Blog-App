@@ -1,5 +1,6 @@
 import React from "react";
 import validate from "../utils/validate";
+import { Link } from "react-router-dom";
 class signUp extends React.Component {
     state = {
         username: "",
@@ -14,7 +15,7 @@ class signUp extends React.Component {
     handleOnChange = (event) => {
         let { name, value } = event.target;
         let errors = { ...this.state.errors };
-        validate(errors,name,value)
+        validate(errors, name, value)
         this.setState({ [name]: value, errors, });
     };
     handleSubmit = (event) => {
@@ -25,8 +26,10 @@ class signUp extends React.Component {
         return (
             <form className="w-1/3 mx-auto relative " onSubmit={this.handleSubmit}>
                 <h1 className="text-3xl text-center">Sign Up</h1>
-                <h3 className="text-green-500 font-medium my-2 text-center">
-                    Have an account?
+                <h3 className="text-gray-500 font-medium my-2 text-center">
+                    <Link to="/sign-in" className="hover:text-green-400">
+                        Have an account ?
+                    </Link>
                 </h3>
                 <fieldset>
                     <div>
@@ -63,7 +66,7 @@ class signUp extends React.Component {
                         type="submit"
                         value="Sign in"
                         disabled={errors.email || errors.password || errors.username}
-                        className="bg-green-500 rounded-md absolute right-0  text-white py-2 px-3 hover:bg-green-600 disabled:bg-slate-300 focus:outline-none"
+                        className="bg-gray-500 rounded-md absolute right-0  text-white py-2 px-3 hover:bg-gray-600 disabled:bg-slate-300 focus:outline-none"
                     >
                         Sign Up
                     </button>

@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import NoMatch from "./components/NoMatch";
 import Navbar from "./components/Navbar";
+import "./styles/style.css"
 import SingleArticle from "./components/SingleArticle";
 
 
