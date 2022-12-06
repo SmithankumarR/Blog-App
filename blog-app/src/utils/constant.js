@@ -1,5 +1,4 @@
-const ROOT_URL = " https://mighty-oasis-08080.herokuapp.com/api/"
-
+const ROOT_URL = "https://conduitapi.onrender.com/api/"
 const articlesUrl = ROOT_URL + "articles";
 const tagsUrl = ROOT_URL + "tags";
 

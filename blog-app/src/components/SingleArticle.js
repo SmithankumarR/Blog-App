@@ -2,6 +2,7 @@ import React from 'react'
 import { articlesUrl } from '../utils/constant';
 import { Link } from "react-router-dom"
 import BeatLoader from 'react-spinners/BeatLoader';
+
 class SingleArticle extends React.Component {
 
     state = {
@@ -20,12 +21,8 @@ class SingleArticle extends React.Component {
                 return res.json()
             })
             .then((data) => {
-                this.setState({
-                    article: data.article,
-                    error: '',
-                })
+              this.setState({ article: data.article})
             })
-
             .catch((err) => {
                 this.setState({ error: "Not able to fetch articles!" })
             });
@@ -41,17 +38,17 @@ class SingleArticle extends React.Component {
         return (
             <div className='container' >
                 <div className='bg-gray-800 p-8'>
-                    <h1 className='text-slate-100 font-semibold text-4xl my-4'>{ }</h1>
+                    <h1 className='text-slate-100 font-semibold text-4xl my-4'>{article.article.title}</h1>
                     <div className="flex">
-                        <img className="w-8 h-8 rounded-full" src={article.author.image} alt={article.title} />
+                        <img className="w-8 h-8 rounded-full" src={article.article.author.image} alt={article.article.title} />
 
                         <div className='text-slate-100 mx-4'>
-                            <h3>{article.title}</h3>
-                            <p className='opacity-30'>{article.createdAt}</p>
+                            <h3 className='text-green-400 font-semibold capitalize'>{article.article.author.username}</h3>
+                            <p className='opacity-30'>{article.article.createdAt}</p>
                         </div>
                     </div>
                 </div>
-                <p className='my-4'>{article.body}</p>
+                <p className='my-4 p-2'>{article.article.body}</p>
                 <hr />
                 <p className='text-justify mt-12'>
                     <Link to="/sign-in"><span className='text-green-500 hover:text-blue-500 hover:underline'>Sign in </span></Link>

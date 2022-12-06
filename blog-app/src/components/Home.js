@@ -17,7 +17,7 @@ class Home extends React.Component {
         activeTab: ""
     };
     removeTab = () => {
-        this.setState({activeTab:""})
+        this.setState({ activeTab: "" })
     }
     addTab = (value) => {
         this.setState({ activeTab: value })
@@ -34,7 +34,7 @@ class Home extends React.Component {
     fetchData = () => {
         const limit = this.state.articlesPerPage;
         const offset = (this.state.activePageIndex - 1) * limit;
-        const tag =  this.state.activeTab;
+        const tag = this.state.activeTab;
 
         fetch(articlesUrl + `/?offset=${offset}&limit=${limit}` + (tag && `tag=${tag}`))
             // used to check the status code 
@@ -79,7 +79,7 @@ class Home extends React.Component {
                             />
                         </div>
                         <div className="w-1/3 mx-2">
-                            <Sidebar addTab={this.addTab}/>
+                            <Sidebar addTab={this.addTab} />
                         </div>
                     </div>
                 </main>
