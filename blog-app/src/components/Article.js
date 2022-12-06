@@ -14,8 +14,8 @@ function Article(props) {
                     </div>
                 </div>
                 <button
-                    className="border w-10 h-10 border-green-400 justify-between p-1 flex">
-                    <FaHeart className="mt-1 text-green-500" />
+                    className="border w-14 h-8 border-green-400 justify-between text-green-500 rounded-md p-2 flex">
+                    <FaHeart  />
                     <span>{props.article.favoritesCount} </span>
                 </button>
             </div>
