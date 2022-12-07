@@ -1,11 +1,11 @@
 import React from "react";
 import validate from "../utils/validate";
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import { signinURL } from "../utils/constant";
 class SignIn extends React.Component {
     state = {
-        email: "",
-        password: "",
+        email: "charlie@gmail.com",
+        password: "Charlie@123",
         errors: {
             email: "",
             password: "",
@@ -19,7 +19,7 @@ class SignIn extends React.Component {
         this.setState({ [name]: value, errors, });
     };
     handleSubmit = (event) => {
-        const { email, password, errors } = this.state;
+        const { email, password } = this.state;
 
         event.preventDefault();
         fetch(signinURL, {
@@ -31,24 +31,27 @@ class SignIn extends React.Component {
         })
             .then((res) => {
                 if (!res.ok) {
-                    res.json().then(({ errors }) => this.setState((prevState) => {
-                        return {
-                            ...prevState,
-                            errors: {
-                                ...prevState.errors,
-                                email: 'Email or Password is incorrect !',
-                            }
-                        }
-                    }));
-                    throw new Error("Fetch not successful");
+                    return res.json().then(({ errors }) => {
+                        return Promise.reject(errors)
+                    })
                 }
                 return res.json();
             })
             .then(({ user }) => {
-                console.log(user);
+                // console.log(user);
+                this.props.updateUser(user);
                 this.setState({ password: "", email: "" });
+                this.props.history.push('/')
             })
-            .catch((error) => console.log('error'));
+            .catch((error) => this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    errors: {
+                        ...prevState.errors,
+                        email: 'Email or Password is incorrect !',
+                    }
+                }
+            }));
     };
     render() {
         const { email, password, errors } = this.state;
@@ -100,4 +103,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

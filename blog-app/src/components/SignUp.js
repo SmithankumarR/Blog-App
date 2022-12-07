@@ -1,7 +1,7 @@
 import React from "react";
 import validate from "../utils/validate";
 import { signupURL } from "../utils/constant";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 class signUp extends React.Component {
     state = {
         username: "",
@@ -34,16 +34,20 @@ class signUp extends React.Component {
         })
             .then((res) => {
                 if (!res.ok) {
-                    res.json().then(({ errors }) => this.setState({ errors }));
-                    throw new Error("Login is not successful");
+                    return res.json().then(({ errors }) => {
+                        return Promise.reject(errors);
+                    })
                 }
                 return res.json();
             })
             .then(({ user }) => {
-                console.log(user);
+                // console.log(user);
+                this.props.updateUser(user);
                 this.setState({ username: "", password: "", email: "" });
+                this.props.history.push('/');
             })
-            .catch((error) => console.log('error'));
+            .catch((errors) => this.setState({ errors }));
+
     };
     render() {
         const { email, password, username, errors } = this.state;
@@ -111,4 +115,4 @@ class signUp extends React.Component {
     }
 }
 
-export default signUp;
+export default withRouter(signUp);
