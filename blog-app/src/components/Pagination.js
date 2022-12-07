@@ -7,8 +7,8 @@ function Pagination(props) {
         pagesArray.push(i);
     }
     return (
-        <div className="flex">
-            <button onClick={() => updateCurrentPageIndex(activePageIndex - 1 < 1 ? 1 : activePageIndex - 1)} className="font-bold">Prev</button>
+        <div className="flex my-4">
+            <button onClick={() => updateCurrentPageIndex(activePageIndex - 1 < 1 ? 1 : activePageIndex - 1)} className="font-bold bg-slate-500 text-slate-50 p-2 rounded-md"> Prev </button>
             <div className="p-2 flex flex-wrap">
                 {pagesArray.map((page) => (
                     <span onClick={() => updateCurrentPageIndex(page)} key={page}
@@ -17,7 +17,7 @@ function Pagination(props) {
                     </span>
                 ))}
             </div>
-            <button onClick={() => updateCurrentPageIndex(activePageIndex + 1 > numberOfPages ? numberOfPages : activePageIndex + 1)} className="font-bold">Next</button>
+            <button onClick={() => updateCurrentPageIndex(activePageIndex + 1 > numberOfPages ? numberOfPages : activePageIndex + 1)} className="font-bold  bg-slate-500 text-slate-50 p-2 rounded-md">Next</button>
         </div>
     );
 }

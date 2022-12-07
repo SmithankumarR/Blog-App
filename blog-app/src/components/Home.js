@@ -12,7 +12,7 @@ class Home extends React.Component {
         articles: [],
         error: "",
         articlesCount: 0,
-        articlesPerPage: 10,
+        articlesPerPage: 6,
         activePageIndex: 1,
         activeTab: ""
     };
