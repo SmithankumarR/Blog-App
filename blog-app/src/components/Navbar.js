@@ -25,9 +25,9 @@ function AuthNavbar() {
     return (
         <ul className="flex text-gray-400">
             <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/" exact>home</NavLink>
-            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/sign-in">New Article</NavLink>
-            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/sign-up">Settings</NavLink>
-            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/sign-up">Profile</NavLink>
+            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/new-article">New Article</NavLink>
+            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/settings">Settings</NavLink>
+            <NavLink className="mx-2 capitalize " activeClassName="font-bold text-black" to="/profile">Profile</NavLink>
 
         </ul>
     )

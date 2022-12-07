@@ -3,6 +3,7 @@ const articlesUrl = ROOT_URL + "articles";
 const tagsUrl = ROOT_URL + "tags";
 const signupURL = ROOT_URL + "users";
 const signinURL = ROOT_URL + "users/login"
+const userVerifyURL = ROOT_URL + "user";
+const localStorageKey = "app_user";
 
-
-export { ROOT_URL, articlesUrl ,tagsUrl, signinURL,signupURL};
+export { ROOT_URL, articlesUrl ,tagsUrl, signinURL,signupURL,localStorageKey,userVerifyURL};
