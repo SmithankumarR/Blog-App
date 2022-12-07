@@ -6,7 +6,6 @@ import NoMatch from "./components/NoMatch";
 import Navbar from "./components/Navbar";
 import "./styles/style.css"
 import SingleArticle from "./components/SingleArticle";
-import Login from "./components/Authentication/Login";
 
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
           <NoMatch />
         </Route>
       </Switch>
-      <Login />
     </div>
   );
 };

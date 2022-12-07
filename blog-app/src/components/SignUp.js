@@ -1,5 +1,6 @@
 import React from "react";
 import validate from "../utils/validate";
+import { signupURL } from "../utils/constant";
 import { Link } from "react-router-dom";
 class signUp extends React.Component {
     state = {
@@ -12,14 +13,37 @@ class signUp extends React.Component {
             password: "",
         },
     };
+
     handleOnChange = (event) => {
         let { name, value } = event.target;
         let errors = { ...this.state.errors };
-        validate(errors, name, value)
-        this.setState({ [name]: value, errors, });
+        validate(errors, name, value);
+        this.setState({ [name]: value, errors });
     };
+
     handleSubmit = (event) => {
+        const { username, email, password } = this.state;
+
         event.preventDefault();
+        fetch(signupURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user: { username, email, password } }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    res.json().then(({ errors }) => this.setState({ errors }));
+                    throw new Error("Login is not successful");
+                }
+                return res.json();
+            })
+            .then(({ user }) => {
+                console.log(user);
+                this.setState({ username: "", password: "", email: "" });
+            })
+            .catch((error) => console.log('error'));
     };
     render() {
         const { email, password, username, errors } = this.state;
@@ -45,7 +69,9 @@ class signUp extends React.Component {
                                 onChange={this.handleOnChange}
                                 value={username}
                             />
-                            <span className="m-4 text-red-600 text-center font-semibold">{errors.username}</span>
+                            <span className="m-4 text-red-600 text-center font-semibold">
+                                {errors.username}
+                            </span>
                             <input
                                 className="border p-2 rounded-md my-1 w-full"
                                 type="email"
@@ -54,7 +80,9 @@ class signUp extends React.Component {
                                 onChange={this.handleOnChange}
                                 value={email}
                             />
-                            <span className="m-4 text-red-600 text-center font-semibold">{errors.email}</span>
+                            <span className="m-4 text-red-600 text-center font-semibold">
+                                {errors.email}
+                            </span>
                             <input
                                 className="border p-2 rounded-md my-1 w-full"
                                 type="password"
@@ -63,7 +91,9 @@ class signUp extends React.Component {
                                 placeholder="Password"
                                 value={password}
                             />
-                            <span className="m-4 text-red-600 text-center font-semibold">{errors.password}</span>
+                            <span className="m-4 text-red-600 text-center font-semibold">
+                                {errors.password}
+                            </span>
                         </div>
 
                         <button

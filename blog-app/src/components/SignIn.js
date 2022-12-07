@@ -1,6 +1,7 @@
 import React from "react";
 import validate from "../utils/validate";
 import { Link } from "react-router-dom"
+import { signinURL } from "../utils/constant";
 class SignIn extends React.Component {
     state = {
         email: "",
@@ -18,7 +19,36 @@ class SignIn extends React.Component {
         this.setState({ [name]: value, errors, });
     };
     handleSubmit = (event) => {
+        const { email, password, errors } = this.state;
+
         event.preventDefault();
+        fetch(signinURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user: { email, password } }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    res.json().then(({ errors }) => this.setState((prevState) => {
+                        return {
+                            ...prevState,
+                            errors: {
+                                ...prevState.errors,
+                                email: 'Email or Password is incorrect !',
+                            }
+                        }
+                    }));
+                    throw new Error("Fetch not successful");
+                }
+                return res.json();
+            })
+            .then(({ user }) => {
+                console.log(user);
+                this.setState({ password: "", email: "" });
+            })
+            .catch((error) => console.log('error'));
     };
     render() {
         const { email, password, errors } = this.state;
