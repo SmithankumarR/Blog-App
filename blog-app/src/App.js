@@ -38,7 +38,7 @@ class App extends React.Component {
         })
         .then(({ user }) => this.updateUser(user))
         .catch((errors) => console.log(errors));
-      // this.setState({ isLoggedIn: true });
+      this.setState({ isLoggedIn: true });
     } else {
       this.setState({ isVerifying: false });
     }

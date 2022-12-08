@@ -4,8 +4,8 @@ import { Link, withRouter } from "react-router-dom"
 import { signinURL } from "../utils/constant";
 class SignIn extends React.Component {
     state = {
-        email: "charlie@gmail.com",
-        password: "Charlie@123",
+        email: "",
+        password: "",
         errors: {
             email: "",
             password: "",
@@ -40,7 +40,6 @@ class SignIn extends React.Component {
             .then(({ user }) => {
                 // console.log(user);
                 this.props.updateUser(user);
-                this.setState({ password: "", email: "" });
                 this.props.history.push('/')
             })
             .catch((error) => this.setState((prevState) => {
