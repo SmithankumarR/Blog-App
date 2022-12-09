@@ -55,9 +55,9 @@ class signUp extends React.Component {
                 <div className="w-1/2">
                     <img src="./images/SignUp.jpg" alt="sign-up-pic" />
                 </div>
-                <form className="w-1/3 mx-auto relative " onSubmit={this.handleSubmit}>
-                    <h1 className="text-3xl text-center">Sign Up</h1>
-                    <h3 className="text-gray-500 font-medium my-2 text-center">
+                <form className="w-1/3 m-auto bg-gray-100 rounded-md p-4 shadow-lg " onSubmit={this.handleSubmit}>
+                    <h1 className="text-3xl text-center font-bold">Sign Up</h1>
+                    <h3 className="text-gray-500 font-medium my-4 text-center">
                         <Link to="/sign-in" className="hover:text-green-400">
                             Have an account ?
                         </Link>
@@ -103,7 +103,7 @@ class signUp extends React.Component {
                             type="submit"
                             value="Sign in"
                             disabled={errors.email || errors.password || errors.username}
-                            className="bg-gray-500 rounded-md absolute right-0  text-white py-2 px-3 hover:bg-gray-600 disabled:bg-slate-300 focus:outline-none"
+                            className="bg-gray-500 rounded-md mt-4 float-right text-white py-2 px-3 hover:bg-gray-600 disabled:bg-slate-300 focus:outline-none"
                         >
                             Sign Up
                         </button>

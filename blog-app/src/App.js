@@ -7,10 +7,9 @@ import SignUp from "./components/SignUp";
 import NoMatch from "./components/NoMatch";
 import Navbar from "./components/Navbar";
 import SingleArticle from "./components/SingleArticle";
-import NewArticle from "./components/NewArticle";
-import Profile from "./components/Profile";
-import Settings from "./components/Settings";
+
 import { localStorageKey, userVerifyURL } from "./utils/constant";
+import NewArticle from "./components/Authenticated/NewArticle";
 
 class App extends React.Component {
   state = {
@@ -67,14 +66,8 @@ function AuthenticatedApp() {
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/new-article">
+      <Route path="/api/users/new-article" exact>
         <NewArticle />
-      </Route>
-      <Route path="/settings">
-        <Settings />
-      </Route>
-      <Route path="/profile">
-        <Profile />
       </Route>
       <Route path="/article/:slug" component={SingleArticle} />
       <Route path="*">

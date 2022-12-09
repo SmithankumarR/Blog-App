@@ -69,7 +69,6 @@ class Home extends React.Component {
                     <FeedNav activeTab={activeTab} removeTab={this.removeTab} />
                     <div className="flex">
                         <div className="w-2/3 mx-2">
-                            <hr className="w-full" />
                             <Articles articles={articles} error={error} />
                             <Pagination
                                 articlesCount={articlesCount}

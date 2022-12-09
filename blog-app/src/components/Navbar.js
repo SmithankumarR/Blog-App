@@ -54,27 +54,12 @@ function AuthNavbar() {
         home
       </NavLink>
       <NavLink
-        className="mx-2 capitalize flex"
+        className="mx-2 capitalize "
         activeClassName="font-bold text-black"
-        to="/new-article"
+        to="api/users/new-article"
+        exact
       >
-        <FaEyeDropper /> <span className="ml-2">New Article</span>
-      </NavLink>
-      <NavLink
-        className="mx-2 capitalize flex"
-        activeClassName="font-bold text-black"
-        to="/settings"
-      >
-        <FcSettings />
-        <span className="ml-2">Settings</span>
-      </NavLink>
-      <NavLink
-        className="mx-2 capitalize flex"
-        activeClassName="font-bold text-black"
-        to="/profile"
-      >
-        <FaUser />
-        <span className="ml-2">Profile</span>
+        New Article
       </NavLink>
     </ul>
   );
