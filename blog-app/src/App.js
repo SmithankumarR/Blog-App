@@ -69,7 +69,7 @@ function AuthenticatedApp(props) {
         <Home />
       </Route>
       <Route path="/new-article" >
-        <NewArticle />
+        <NewArticle user={props.user} />
       </Route>
       <Route path="/settings" >
         <Settings />
@@ -93,7 +93,7 @@ function NonAuthenticatedApp(props) {
       <Route path="/sign-up">
         <SignUp updateUser={props.updateUser} />
       </Route>
-      <Route path="/article/:slug" component={SingleArticle} />
+      <Route path="/article/:slug" component={SingleArticle} user={props.user} />
       <Route path="*">
         <NoMatch />
       </Route>

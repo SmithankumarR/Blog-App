@@ -34,15 +34,15 @@ function Article(props) {
         <Link to={`/article/${props.article.slug}`}>
           <button className=" text-green-500">Read more...</button>
         </Link>
-        <span className="flex">
+        <div className="flex">
           {
             props.article.taglist.map((tag) => (
-              <p key={tag} className="border-black" >
+              <h3 key={tag} className="capitalize px-2 rounded-md" >
                 {tag}
-              </p>
+              </h3>
             ))
           }
-        </span>
+        </div>
       </div>
       <hr className="w-full mt-2" />
     </div>

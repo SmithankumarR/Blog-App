@@ -1,6 +1,6 @@
 import React from "react";
 import { articlesUrl } from "../utils/constant";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
 
 class SingleArticle extends React.Component {
@@ -32,7 +32,12 @@ class SingleArticle extends React.Component {
       return error;
     }
     if (!article) {
-      return  <span className="text-4xl font-bold"> Loading <BeatLoader /> </span>
+      return (
+        <span className="text-4xl font-bold">
+          {" "}
+          Loading <BeatLoader />{" "}
+        </span>
+      );
     }
     return (
       <div className="w-full">
@@ -57,23 +62,27 @@ class SingleArticle extends React.Component {
         </div>
         <p className="my-4 p-2">{article.article.body}</p>
         <hr />
-        <p className="text-justify mt-12">
-          <Link to="/sign-in">
-            <span className="text-green-500 hover:text-blue-500 hover:underline">
-              Sign in{" "}
-            </span>
-          </Link>
-          <span className="mx-1">or</span>
-          <Link to="/sign-up">
-            <span className="text-green-500 hover:text-blue-500 hover:underline">
-              Sign up{" "}
-            </span>
-          </Link>
-          <span className="mx-1">to add comments on this article.</span>
-        </p>
+        {this.props.user === null ? (
+          <footer className="text-justify mt-12">
+            <Link to="/sign-in">
+              <span className="text-green-500 hover:text-blue-500 hover:underline">
+                Sign in
+              </span>
+            </Link>
+            <span className="mx-1">or</span>
+            <Link to="/sign-up">
+              <span className="text-green-500 hover:text-blue-500 hover:underline">
+                Sign up
+              </span>
+            </Link>
+            <span className="mx-1">to add comments on this article.</span>
+          </footer>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 }
 
-export default SingleArticle;
+export default withRouter(SingleArticle);
