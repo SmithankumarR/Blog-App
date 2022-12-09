@@ -41,7 +41,6 @@ function NonAuthNavbar() {
     </ul>
   );
 }
-
 function AuthNavbar() {
   return (
     <ul className="flex text-gray-400">
@@ -79,4 +78,5 @@ function AuthNavbar() {
     </ul>
   );
 }
+
 export default withRouter(Navbar);

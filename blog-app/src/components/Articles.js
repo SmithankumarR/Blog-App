@@ -1,18 +1,16 @@
-import BeatLoader from "react-spinners/BeatLoader"
 import Article from "./Article";
+import BeatLoader from "react-spinners/BeatLoader"
 
 function Articles(props) {
     const { articles, error } = props
 
     if (error) {
-        return <p>{props.error}</p>
-    }
-    if (articles.length < 1) {
-        return <h2 className="text-3xl">No, Articles Found !</h2>
+        return <p>{error}</p>
     }
     if (!articles) {
-        return <BeatLoader />
+        return <span className="text-4xl text-center font-bold"> Loading <BeatLoader /> </span>
     }
+
     return (
         <section className="flex flex-col">
             {

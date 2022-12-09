@@ -56,12 +56,12 @@ class SignIn extends React.Component {
         const { email, password, errors } = this.state;
         return (
             <div className="flex justify-between">
-                <div className="w-1/2">
+                <div className="w-1/2 flexible-img">
                     <img src="./images/SignIn.jpg" alt="sign-in-pic" />
                 </div>
-                <form className="w-1/3 mx-auto relative " onSubmit={this.handleSubmit}>
-                    <h1 className="text-3xl text-center">Sign in</h1>
-                    <h3 className="text-gray-500 font-medium my-2 text-center">
+                <form className="w-1/3 m-auto bg-gray-100 rounded-md p-4 shadow-lg" onSubmit={this.handleSubmit}>
+                    <h1 className="text-3xl text-center font-bold">Sign in</h1>
+                    <h3 className="text-gray-500 font-medium my-4 text-center">
                         <Link to="/sign-up" className="hover:text-green-400">
                             Need an account ?
                         </Link>
@@ -91,7 +91,7 @@ class SignIn extends React.Component {
                             type="submit"
                             value="Sign in"
                             disabled={errors.email || errors.password}
-                            className="bg-gray-500 rounded-md absolute right-0  text-white py-2 px-3 hover:bg-gray-600 disabled:bg-slate-300 focus:outline-none"
+                            className="bg-gray-500 rounded-md float-right mt-4 text-white py-2 px-3 hover:bg-gray-600 disabled:bg-slate-300 focus:outline-none"
                         >
                             Sign In
                         </button>

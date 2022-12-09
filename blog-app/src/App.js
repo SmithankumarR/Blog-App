@@ -7,10 +7,11 @@ import SignUp from "./components/SignUp";
 import NoMatch from "./components/NoMatch";
 import Navbar from "./components/Navbar";
 import SingleArticle from "./components/SingleArticle";
-import NewArticle from "./components/NewArticle";
-import Profile from "./components/Profile";
-import Settings from "./components/Settings";
+
 import { localStorageKey, userVerifyURL } from "./utils/constant";
+import NewArticle from "./components/Authenticated/NewArticle";
+import Settings from "./components/Authenticated/Settings";
+import Profile from "./components/Authenticated/Profile"
 
 class App extends React.Component {
   state = {
@@ -52,34 +53,31 @@ class App extends React.Component {
     return (
       <div className="container mx-auto">
         <Navbar isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
-        {this.isLoggedIn ? (
-          <AuthenticatedApp />
+        {this.state.isLoggedIn ? (
+          <AuthenticatedApp user={this.state.user} />
         ) : (
-          <NonAuthenticatedApp updateUser={this.updateUser} />
+          <NonAuthenticatedApp updateUser={this.updateUser} user={this.state.user} />
         )}
       </div>
     );
   }
 }
-function AuthenticatedApp() {
+function AuthenticatedApp(props) {
   return (
     <Switch>
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/new-article">
+      <Route path="/new-article" >
         <NewArticle />
       </Route>
-      <Route path="/settings">
+      <Route path="/settings" >
         <Settings />
       </Route>
-      <Route path="/profile">
+      <Route path="/profile" >
         <Profile />
       </Route>
       <Route path="/article/:slug" component={SingleArticle} />
-      <Route path="*">
-        <NoMatch />
-      </Route>
     </Switch>
   );
 }
