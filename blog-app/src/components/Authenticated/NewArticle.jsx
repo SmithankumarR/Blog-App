@@ -62,7 +62,6 @@ class NewArticle extends React.Component {
         <form
           action=""
           className="w-1/3 m-auto bg-gray-100 rounded-md p-4 shadow-lg "
-          onSubmit={this.handleSubmit}
         >
           <h1 className="text-center text-2xl font-bold mb-4">
             Add Your Article

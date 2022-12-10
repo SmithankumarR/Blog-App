@@ -33,10 +33,9 @@ class SingleArticle extends React.Component {
     }
     if (!article) {
       return (
-        <span className="text-4xl font-bold">
-          {" "}
-          Loading <BeatLoader />{" "}
-        </span>
+        <div>
+           <BeatLoader className="text-center" />
+        </div>
       );
     }
     return (

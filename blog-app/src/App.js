@@ -46,6 +46,7 @@ class App extends React.Component {
   }
 
   updateUser = (user) => {
+    console.log(user);
     this.setState({ isLoggedIn: true, user, isVerifying: false });
     localStorage.setItem(localStorageKey, user.token);
   };
@@ -72,10 +73,13 @@ function AuthenticatedApp(props) {
         <NewArticle user={props.user} />
       </Route>
       <Route path="/settings" >
-        <Settings />
+        <Settings
+          user={props.user}
+          updateUser={props.updateUser}
+        />
       </Route>
       <Route path="/profile" >
-        <Profile />
+        <Profile user={props.user} />
       </Route>
       <Route path="/article/:slug" component={SingleArticle} />
     </Switch>

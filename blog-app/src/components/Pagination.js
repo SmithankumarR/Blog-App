@@ -19,7 +19,7 @@ function Pagination(props) {
             activePageIndex - 1 < 1 ? 1 : activePageIndex - 1
           )
         }
-        className="font-bold bg-slate-500 text-slate-50 p-2 rounded-md"
+        className="font-bold bg-blue-500 text-blue-50 py-2 px-5 rounded-lg mx-3"
       >
         {" "}
         Prev{" "}
@@ -30,11 +30,11 @@ function Pagination(props) {
           key={page}
           className={`${
             activePageIndex === page
-              ? "bg-orange-600 hover:bg-orange-400 text-white border my-2 border-gray-900 p-2 mx-2 rounded-md"
-              : "border my-2 border-orange-400 p-2 mx-2 rounded-md"
+              ? "bg-blue-500 hover:bg-blue-400 text-white border my-2 border-gray-900 p-2 mx-2 rounded-md"
+              : "border my-2 border-blue-400 p-2 mx-2 rounded-md"
           } `}
         >
-          {page}
+          {page} 
         </button>
       ))}
       <button
@@ -45,7 +45,7 @@ function Pagination(props) {
               : activePageIndex + 1
           )
         }
-        className="font-bold  bg-slate-500 text-slate-50 p-2 rounded-md"
+        className="font-bold  bg-blue-500 text-blue-50  px-5  rounded-lg"
       >
         Next
       </button>
