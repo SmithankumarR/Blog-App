@@ -56,7 +56,7 @@ class SignIn extends React.Component {
         const { email, password, errors } = this.state;
         return (
             <div className="flex justify-between">
-                <div className="w-1/2 flexible-img">
+                <div className="w-1/2">
                     <img src="./images/SignIn.jpg" alt="sign-in-pic" />
                 </div>
                 <form className="w-1/3 m-auto bg-gray-100 rounded-md p-4 shadow-lg" onSubmit={this.handleSubmit}>

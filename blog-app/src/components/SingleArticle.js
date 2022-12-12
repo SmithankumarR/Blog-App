@@ -34,7 +34,7 @@ class SingleArticle extends React.Component {
     if (!article) {
       return (
         <div>
-           <BeatLoader className="text-center" />
+          <BeatLoader className="text-center" />
         </div>
       );
     }
@@ -45,11 +45,13 @@ class SingleArticle extends React.Component {
             {article.article.title}
           </h1>
           <div className="flex">
-            <img
-              className="w-8 h-8 rounded-full"
-              src={article.article.author.image}
-              alt={article.article.title}
-            />
+            <Link to="/profile">
+              <img
+                className="w-8 h-8 rounded-full"
+                src={article.article.author.image}
+                alt={article.article.title}
+              />
+            </Link>
 
             <div className="text-slate-100 mx-4">
               <h3 className="text-green-400 font-semibold capitalize">

@@ -3,10 +3,14 @@ import { FcSettings, } from "react-icons/fc";
 import { articlesUrl } from "../../utils/constant";
 import Articles from "../Articles"
 import Pagination from "../Pagination"
+import { Link } from "react-router-dom"
 class Profile extends React.Component {
   state = {
     activeTab: 'author',
-    articles: []
+    articles: [],
+    articlesCount: 10,
+    articlesPerPage: 6,
+    activePageIndex: 1,
   }
   fetchData = () => {
     fetch(articlesUrl + `/?author=${this.state.activeTab}=${this.props.user.username}`)
@@ -37,23 +41,28 @@ class Profile extends React.Component {
     });
 
   }
+  updateCurrentPageIndex = (index) => {
+    this.setState({ activePageIndex: index }, this.fetchData)
+  }
   render() {
-    const { activeTab } = this.state;
+    const { activeTab, articlesCount, articlesPerPage, activePageIndex } = this.state;
     const { image, username } = this.props.user;
     return (
       <section>
-        <div className="bg-gray-800 text-white p-12">
+        <div className="bg-gray-800 text-white py-28">
           <div className="w-2/3 mx-auto">
             <img
               src={image || "https://api.realworld.io/images/smiley-cyrus.jpeg"}
               alt="profile-img"
-              className="w-24 h-24 mx-auto author-4 rounded-full"
+              className="w-24 h-24 mx-auto rounded-full"
             />
             <h2 className="text-center text-2xl capitalize font-semibold">{username}</h2>
 
             <span className="float-right">
-              <button className="flex border rounded-md py-2 px-4"> <FcSettings /><span className="ml-4"> Edit Profile Settings</span></button>
-              <p>+ Follow <span> {username}</span></p>
+              <button className="flex border rounded-md py-2 px-4"> <FcSettings /><span className="ml-4">
+                <Link to="/settings">Edit Profile Settings
+                </Link> </span></button>
+
             </span>
           </div>
         </div>
@@ -71,8 +80,15 @@ class Profile extends React.Component {
             Favorite Articles
           </button>
         </div>
-        <Articles articles={this.state.articles} />
-        <Pagination />
+        <div className="my-8">
+          <Articles articles={this.state.articles} />
+          <Pagination
+            articlesCount={articlesCount}
+            articlesPerPage={articlesPerPage}
+            activePageIndex={activePageIndex}
+            updateCurrentPageIndex={this.updateCurrentPageIndex}
+          />
+        </div>
       </section>
     );
   }

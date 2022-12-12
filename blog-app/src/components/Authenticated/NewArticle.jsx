@@ -1,6 +1,6 @@
 import React from "react";
 import { articlesUrl } from "../../utils/constant";
-import { withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom";
 
 class NewArticle extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class NewArticle extends React.Component {
       description: "",
       body: "",
       taglist: "",
-    }
+    },
   };
   handleChange = (event) => {
     let { name, value } = event.target;
@@ -23,30 +23,38 @@ class NewArticle extends React.Component {
     event.preventDefault();
     const { title, description, body, taglist } = this.state;
     fetch(articlesUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Token ${this.props.user.token} `
+        "Content-Type": "application/json",
+        authorization: `Token ${this.props.user.token} `,
       },
       body: JSON.stringify({
         // separate the strings or additional spaces given in tags and convert it into an array
-        article: { title, description, body, taglist: taglist.split(',').map(tag => tag.trim()) },
+        article: {
+          title,
+          description,
+          body,
+          taglist: taglist.split(",").map((tag) => tag.trim()),
+        },
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Can not create new article");
+        }
+        return res.json();
       })
-    }).then((res) => {
-      if (!res.ok) {
-        throw new Error('Can not create new article');
-      }
-      return res.json();
-    }).then(({ article }) => {
-      console.log(article);
-      this.setState({
-        title: "",
-        description: "",
-        body: "",
-        taglist: ""
-      });
-      this.props.history.push('/');
-    }).catch((errors) => this.setState({ errors }));
+      .then(({ article }) => {
+        console.log(article);
+        this.setState({
+          title: "",
+          description: "",
+          body: "",
+          taglist: "",
+        });
+        this.props.history.push("/");
+      })
+      .catch((errors) => this.setState({ errors }));
   };
   render() {
     const { title, description, body, taglist } = this.state;

@@ -16,7 +16,7 @@ import Profile from "./components/Authenticated/Profile"
 class App extends React.Component {
   state = {
     isLoggedIn: false,
-    user: null,
+    user: "",
     isVerifying: true,
   };
 
@@ -47,7 +47,7 @@ class App extends React.Component {
 
   updateUser = (user) => {
     console.log(user);
-    this.setState({ isLoggedIn: true, user, isVerifying: false });
+    this.setState({ isLoggedIn: true, user:user, isVerifying: false });
     localStorage.setItem(localStorageKey, user.token);
   };
   render() {
@@ -57,7 +57,7 @@ class App extends React.Component {
         {this.state.isLoggedIn ? (
           <AuthenticatedApp user={this.state.user} />
         ) : (
-          <NonAuthenticatedApp updateUser={this.updateUser} user={this.state.user} />
+          <UnAuthenticatedApp updateUser={this.updateUser} user={this.state.user} />
         )}
       </div>
     );
@@ -81,11 +81,13 @@ function AuthenticatedApp(props) {
       <Route path="/profile" >
         <Profile user={props.user} />
       </Route>
-      <Route path="/article/:slug" component={SingleArticle} />
+      <Route path="/article/:slug">
+        <SingleArticle user={props.user} />
+      </Route>
     </Switch>
   );
 }
-function NonAuthenticatedApp(props) {
+function UnAuthenticatedApp(props) {
   return (
     <Switch>
       <Route path="/" exact>
@@ -97,7 +99,9 @@ function NonAuthenticatedApp(props) {
       <Route path="/sign-up">
         <SignUp updateUser={props.updateUser} />
       </Route>
-      <Route path="/article/:slug" component={SingleArticle} user={props.user} />
+      <Route path="/article/:slug" >
+        <SingleArticle user={props.user} />
+      </Route>
       <Route path="*">
         <NoMatch />
       </Route>
