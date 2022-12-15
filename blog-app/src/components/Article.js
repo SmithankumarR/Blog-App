@@ -9,8 +9,8 @@ function Article(props) {
         <div className="flex justify-center items-center my-2">
           <img
             className="w-8 h-8 rounded-full"
-            src={props.article.author.image}
-            alt={props.article.title}
+            src={props.article.author.image || `https://api.realworld.io/images/smiley-cyrus.jpeg`}
+            alt={props.article.author.username}
           />
           <div className="mx-4">
             <h3 className="text-lg text-green-500 ">

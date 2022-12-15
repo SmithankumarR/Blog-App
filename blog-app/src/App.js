@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/style.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch ,withRouter } from "react-router-dom";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
@@ -11,22 +11,23 @@ import SingleArticle from "./components/SingleArticle";
 import { localStorageKey, userVerifyURL } from "./utils/constant";
 import NewArticle from "./components/Authenticated/NewArticle";
 import Settings from "./components/Authenticated/Settings";
-import Profile from "./components/Authenticated/Profile"
+import Profile from "./components/Authenticated/Profile";
+import BeatLoader from "react-spinners/BeatLoader";
 
 class App extends React.Component {
   state = {
     isLoggedIn: false,
-    user: "",
+    user: null,
     isVerifying: true,
   };
 
   componentDidMount() {
-    let storageKey = localStorage[localStorageKey];
-    if (storageKey) {
+    let key = JSON.parse(localStorage.getItem("userToken"));;
+    if (key) {
       fetch(userVerifyURL, {
         method: "GET",
         headers: {
-          authorization: `Token ${storageKey}`,
+          authorization: `Token ${key}`,
         },
       })
         .then((res) => {
@@ -39,25 +40,40 @@ class App extends React.Component {
         })
         .then(({ user }) => this.updateUser(user))
         .catch((errors) => console.log(errors));
-      this.setState({ isLoggedIn: true });
     } else {
       this.setState({ isVerifying: false });
     }
   }
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      user: null,
+    });
+    localStorage.clear();
+  };
 
   updateUser = (user) => {
-    console.log(user);
-    this.setState({ isLoggedIn: true, user:user, isVerifying: false });
+    this.setState({
+      isLoggedIn: true,
+      user,
+      isVerifying: false,
+    });
     localStorage.setItem(localStorageKey, user.token);
   };
   render() {
+    // if (this.state.isVerifying) {
+    //   return <BeatLoader />;
+    // }
     return (
       <div className="container mx-auto">
         <Navbar isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
         {this.state.isLoggedIn ? (
-          <AuthenticatedApp user={this.state.user} />
+          <AuthenticatedApp logout={this.handleLogout} user={this.state.user} />
         ) : (
-          <UnAuthenticatedApp updateUser={this.updateUser} user={this.state.user} />
+          <UnAuthenticatedApp
+            updateUser={this.updateUser}
+            user={this.state.user}
+          />
         )}
       </div>
     );
@@ -69,20 +85,20 @@ function AuthenticatedApp(props) {
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/new-article" >
+      <Route path="/new-article">
         <NewArticle user={props.user} />
       </Route>
-      <Route path="/settings" >
-        <Settings
-          user={props.user}
-          updateUser={props.updateUser}
-        />
+      <Route path="/settings">
+        <Settings user={props.user} updateUser={props.updateUser} />
       </Route>
-      <Route path="/profile" >
+      <Route path="/profile">
         <Profile user={props.user} />
       </Route>
       <Route path="/article/:slug">
         <SingleArticle user={props.user} />
+      </Route>
+      <Route path="*">
+        <NoMatch />
       </Route>
     </Switch>
   );
@@ -99,7 +115,7 @@ function UnAuthenticatedApp(props) {
       <Route path="/sign-up">
         <SignUp updateUser={props.updateUser} />
       </Route>
-      <Route path="/article/:slug" >
+      <Route path="/article/:slug">
         <SingleArticle user={props.user} />
       </Route>
       <Route path="*">
@@ -108,4 +124,4 @@ function UnAuthenticatedApp(props) {
     </Switch>
   );
 }
-export default App;
+export default withRouter(App);
