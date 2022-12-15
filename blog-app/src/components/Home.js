@@ -11,13 +11,13 @@ class Home extends React.Component {
     state = {
         articles: [],
         error: "",
-        articlesCount: 0,
-        articlesPerPage: 10,
+        articlesCount: 10,
+        articlesPerPage: 6,
         activePageIndex: 1,
         activeTab: ""
     };
     removeTab = () => {
-        this.setState({activeTab:""})
+        this.setState({ activeTab: "" })
     }
     addTab = (value) => {
         this.setState({ activeTab: value })
@@ -34,9 +34,9 @@ class Home extends React.Component {
     fetchData = () => {
         const limit = this.state.articlesPerPage;
         const offset = (this.state.activePageIndex - 1) * limit;
-        const tag =  this.state.activeTab;
+        const tag = this.state.activeTab;
 
-        fetch(articlesUrl + `/?offset=${offset}&limit=${limit}` + (tag && `tag=${tag}`))
+        fetch(articlesUrl + `/?offset=${offset}&limit=${limit}` + (tag && `&tag=${tag}`))
             // used to check the status code 
             .then((res) => {
                 if (!res.ok) {
@@ -48,7 +48,6 @@ class Home extends React.Component {
                 this.setState({
                     articles: data.articles,
                     error: '',
-                    articlesCount: data.articlesCount
                 })
             })
 
@@ -61,7 +60,7 @@ class Home extends React.Component {
     }
     render() {
         const { articles, error, articlesCount, articlesPerPage, activePageIndex, activeTab } = this.state;
-
+      
         return (
             <>
                 <main className="container mx-auto">
@@ -69,7 +68,6 @@ class Home extends React.Component {
                     <FeedNav activeTab={activeTab} removeTab={this.removeTab} />
                     <div className="flex">
                         <div className="w-2/3 mx-2">
-                            <hr className="w-full" />
                             <Articles articles={articles} error={error} />
                             <Pagination
                                 articlesCount={articlesCount}
@@ -79,10 +77,11 @@ class Home extends React.Component {
                             />
                         </div>
                         <div className="w-1/3 mx-2">
-                            <Sidebar addTab={this.addTab}/>
+                            <Sidebar addTab={this.addTab} />
                         </div>
                     </div>
                 </main>
+
             </>
         )
     }

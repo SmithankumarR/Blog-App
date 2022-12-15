@@ -6,14 +6,14 @@ function FeedNav(props) {
     <nav className="flex justify-start items-center">
       <ul className="flex">
         <li className="m-8">
-          <Link className={props.activeTab === "" && "text-green-600 no-underline" } to="/" onClick={props.removeTab}>
+          <Link className={props.activeTab === "" && "text-green-600 font-bold"} to="/" onClick={props.removeTab}>
             Global Feed
           </Link>
         </li>
         {
           props.activeTab &&
           <li className="m-8">
-              <Link className={props.activeTab && "text-green-600 no-underline"} to="/">
+            <Link className={props.activeTab && "text-green-600 font-bold"} to="/">
               #{props.activeTab}
             </Link>
           </li>

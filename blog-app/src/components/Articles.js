@@ -1,29 +1,29 @@
-import BeatLoader from "react-spinners/BeatLoader"
 import Article from "./Article";
+import BeatLoader from "react-spinners/BeatLoader"
 
 function Articles(props) {
+    const { articles, error } = props
 
-    if (props.error) {
-        return <p>{props.error}</p>
+    if (articles.length < 1) {
+        return <h2> No Articles Found</h2>
     }
-    if (!props.articles) {
-        return <BeatLoader />
-    }
-    if (props.articles.length < 1) {
-        return <h2 className="text-3xl">No, Articles Found !</h2>
+    if (error) {
+        return <p>{error}</p>
     }
     return (
-        <section className="flex">
-            <article>
-                {
-                    props.articles.map((article) => (
-                        <div>
-                            {/* {console.log(article)} */}
-                            <Article key={article.id} article={article} />
-                        </div>
-                    ))
-                }
-            </article>
+        <section className="flex flex-col">
+            {
+                (!articles) ? <span className="text-4xl text-center font-bold"> Loading <BeatLoader /> </span>
+
+                    :
+                    <div>
+                        {
+                            articles.map((article) => (
+                                <Article key={article.slug} {...article} />
+                            ))
+                        }
+                    </div>
+            }
         </section>
     )
 }
